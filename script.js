@@ -1,14 +1,50 @@
-// Smooth scrolling for navigation links
+// Configuração do efeito de digitação
+const textToType = "Professor de Tecnologia Educacional";
+const typingElement = document.getElementById('typing-text');
+let charIndex = 0;
+
+function typeWriter() {
+    if (typingElement && charIndex < textToType.length) {
+        typingElement.textContent += textToType.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeWriter, 50); // Velocidade da digitação (ms)
+    }
+}
+
+// Inicialização
+document.addEventListener('DOMContentLoaded', () => {
+    // Inicia digitação com pequeno delay
+    setTimeout(typeWriter, 500);
+
+    // Atualiza ano no rodapé
+    const yearElement = document.getElementById('year');
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
+
+    // Adiciona classe de animação ao header
+    const headerContent = document.querySelector('.header-content');
+    if (headerContent) {
+        headerContent.classList.add('animate');
+    }
+});
+
+// Scroll Suave
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
     });
 });
 
-// Add animation on scroll
+// Observador de Interseção para Animações ao Rolar
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -16,41 +52,4 @@ const observerOptions = {
 
 const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('animate');
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-// Observe sections for animation
-document.querySelectorAll('section').forEach(section => {
-    observer.observe(section);
-});
-
-// Add animation class to project cards
-document.querySelectorAll('.project-card').forEach((card, index) => {
-    card.style.transitionDelay = `${index * 0.1}s`;
-    observer.observe(card);
-});
-
-// Add animation class to social links
-document.querySelectorAll('.social-link').forEach((link, index) => {
-    link.style.transitionDelay = `${index * 0.1}s`;
-    observer.observe(link);
-});
-
-// Update copyright year automatically
-document.addEventListener('DOMContentLoaded', () => {
-    const year = new Date().getFullYear();
-    const yearElement = document.querySelector('footer p');
-    if (yearElement) {
-        yearElement.textContent = yearElement.textContent.replace('2025', year);
-    }
-});
-
-// Add animation class to header content
-const headerContent = document.querySelector('.header-content');
-if (headerContent) {
-    headerContent.classList.add('animate');
-}
+        if (entry.isIntersect

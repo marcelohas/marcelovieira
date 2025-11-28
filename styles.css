@@ -66,7 +66,7 @@ a:hover {
     background: var(--primary-color);
     color: white;
     padding: 12px 30px;
-    border-radius: 50px; /* Borda arredondada moderna */
+    border-radius: 50px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -91,11 +91,10 @@ header {
     padding: 140px 0 100px;
     text-align: center;
     position: relative;
-    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%); /* Corte diagonal */
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
     color: white;
 }
 
-/* Padrão de fundo sutil no header */
 header::before {
     content: '';
     position: absolute;
@@ -141,7 +140,7 @@ header::before {
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* Cursor piscando para o efeito de digitação */
+/* Cursor piscando */
 .cursor {
     display: inline-block;
     width: 2px;
@@ -168,7 +167,6 @@ header::before {
 
 .bg-light {
     background-color: #fff;
-    position: relative;
 }
 
 /* --- SOBRE MIM --- */
@@ -214,7 +212,6 @@ header::before {
     box-shadow: var(--shadow-hover);
 }
 
-/* Detalhe colorido no topo do card ao passar o mouse */
 .project-card::before {
     content: '';
     position: absolute;
@@ -261,6 +258,17 @@ header::before {
     box-shadow: var(--shadow-soft);
 }
 
+.contact-form-container {
+    max-width: 800px;
+    margin: -50px auto 2rem; /* Sobe um pouco para sobrepor o header */
+    padding: 2rem;
+    background: white;
+    border-radius: 16px;
+    box-shadow: var(--shadow-hover);
+    position: relative;
+    z-index: 10;
+}
+
 .social-links {
     display: flex;
     justify-content: center;
@@ -286,10 +294,6 @@ header::before {
     color: white;
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-}
-
-.social-link i {
-    font-size: 1.3rem;
 }
 
 /* --- FOOTER --- */
